@@ -6,17 +6,21 @@ import { Professor } from './entities/professore.entity';
 
 @Injectable()
 export class ProfessoresService {
-  constructor(@Inject("PROFESSOR_REPOSITORY") private professorProvider: Repository<Professor>) { }
+  constructor(
+    @Inject("PROFESSOR_REPOSITORY")
+    private reposytory: Repository<Professor>
+  ) { }
+
   create(createProfessoreDto: CreateProfessoreDto) {
     return 'This action adds a new professore';
   }
 
   findAll(): Promise<Professor[]> {
-    return this.professorProvider.find();
+    return this.reposytory.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} professore`;
+    return this.reposytory.findBy({ id });
   }
 
   update(id: number, updateProfessoreDto: UpdateProfessoreDto) {
