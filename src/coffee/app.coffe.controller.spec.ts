@@ -1,7 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { ImNotACoffeMachineException } from "src/exceptions/im.not.a.coffe.machine.exception";
-import { AppCoffeeService } from "src/services/app.coffee.service";
 import { AppCoffeController } from "./app.coffe.controler";
+import { AppCoffeeService } from "./app.coffee.service";
+import { ImNotACoffeMachineException } from "./exceptions/im.not.a.coffe.machine.exception";
 
 describe('AppCoffeeControler', () => {
     let appCoffeeControler: AppCoffeController;

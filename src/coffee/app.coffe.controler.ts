@@ -1,6 +1,6 @@
 import { Controller, Get, UseFilters } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/filter/http/respose.filter';
-import { AppCoffeeService } from 'src/services/app.coffee.service';
+import { AppCoffeeService } from './app.coffee.service';
 
 @Controller("coffee-machine")
 export class AppCoffeController {
