@@ -6,7 +6,6 @@ import { AppCoffeeService } from './app.coffee.service';
 export class AppCoffeController {
     constructor(private readonly appService: AppCoffeeService) { }
 
-    @UseFilters(new HttpExceptionFilter())
     @Get('make-coffee')
     makeCorffee(): string {
         return this.appService.getCoffe();

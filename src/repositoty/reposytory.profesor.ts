@@ -3,8 +3,8 @@ import { DataSource } from 'typeorm';
 
 export const professorProvider = [
     {
-        provide: "PROFESSOR_REPOSITORY",
+        provide: repository_names.PROFESSOR_REPOSITORY,// TODO: legar esta string para um arquivo de constates
         useFactory: (dataSource: DataSource) => dataSource.getRepository(Professor),
-        inject: ["DATA_SOURCE"], // TODO: legar esta string para um arquivo de constates
+        inject: [database_consts.DATA_SOURCE], // TODO: legar esta string para um arquivo de constates
     },
 ];

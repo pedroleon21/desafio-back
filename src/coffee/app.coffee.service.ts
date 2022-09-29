@@ -1,4 +1,4 @@
-import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
+import { Injectable, HttpStatus } from '@nestjs/common';
 import { ImNotACoffeMachineException } from './exceptions/im.not.a.coffe.machine.exception';
 @Injectable()
 export class AppCoffeeService {

@@ -2,7 +2,7 @@ import { DataSource } from 'typeorm';
 
 export const databaseProviders = [
     {
-        provide: 'DATA_SOURCE',
+        provide: database_consts.DATA_SOURCE,
         useFactory: async () => {
             const dataSource = new DataSource({
                 type: 'postgres' as 'postgres', //problema do postegres defina assim
