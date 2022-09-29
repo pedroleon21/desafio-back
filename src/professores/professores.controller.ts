@@ -3,9 +3,9 @@ import { ProfessoresService } from './professores.service';
 import { CreateProfessoreDto } from './dto/create-professore.dto';
 import { UpdateProfessoreDto } from './dto/update-professore.dto';
 
-@Controller('professores')
+@Controller('professor')
 export class ProfessoresController {
-  constructor(private readonly professoresService: ProfessoresService) {}
+  constructor(private readonly professoresService: ProfessoresService) { }
 
   @Post()
   create(@Body() createProfessoreDto: CreateProfessoreDto) {

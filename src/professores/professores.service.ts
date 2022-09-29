@@ -7,27 +7,34 @@ import { Professor } from './entities/professore.entity';
 @Injectable()
 export class ProfessoresService {
   constructor(
-    @Inject("PROFESSOR_REPOSITORY")
+    @Inject(repository_names.PROFESSOR_REPOSITORY)
     private reposytory: Repository<Professor>
   ) { }
 
   create(createProfessoreDto: CreateProfessoreDto) {
-    return 'This action adds a new professore';
+    return this.reposytory.save(this.reposytory.create(createProfessoreDto));
   }
 
   findAll(): Promise<Professor[]> {
-    return this.reposytory.find();
+    return this.reposytory.createQueryBuilder('Professor')
+      .orderBy("id")
+      .execute();
   }
 
-  findOne(id: number) {
-    return this.reposytory.findBy({ id });
+  findOne(id: number): Promise<Professor> {
+    return this.reposytory.findOneBy({ id });
   }
 
-  update(id: number, updateProfessoreDto: UpdateProfessoreDto) {
-    return `This action updates a #${id} professore`;
+  async update(id: number, updateProfessoreDto: UpdateProfessoreDto): Promise<Professor> {
+    await this.reposytory
+      .createQueryBuilder()
+      .update(updateProfessoreDto)
+      .where({ id })
+      .execute();
+    return this.reposytory.findOneBy({ id });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} professore`;
+    return this.reposytory.delete(id);
   }
 }
