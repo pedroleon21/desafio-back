@@ -49,7 +49,7 @@ export class ProfessoresService {
           materias: result.map(r => r.materia_materiaName),
         }
         return newReult;
-      });
+      });//todo:corrigir isso
   }
 
   async update(id: number, updateProfessoreDto: UpdateProfessoreDto): Promise<Professor> {
