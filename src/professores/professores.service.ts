@@ -1,4 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { Aula } from 'src/aula/entities/aula.entity';
+import { Materia } from 'src/materia/entities/materia.entity';
 import { Repository } from 'typeorm';
 import { CreateProfessoreDto } from './dto/create-professore.dto';
 import { UpdateProfessoreDto } from './dto/update-professore.dto';
@@ -35,6 +37,6 @@ export class ProfessoresService {
   }
 
   remove(id: number) {
-    return this.reposytory.delete(id);
+    return this.reposytory.delete({ id });
   }
 }
