@@ -9,7 +9,7 @@ import { Professor } from './entities/professore.entity';
 @Injectable()
 export class ProfessoresService {
   constructor(
-    @Inject(repository_names.PROFESSOR_REPOSITORY)
+    @Inject(REPOSITORY_NAMES.PROFESSOR_REPOSITORY)
     private reposytory: Repository<Professor>
   ) { }
 
