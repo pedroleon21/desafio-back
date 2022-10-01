@@ -23,8 +23,33 @@ export class ProfessoresService {
       .execute();
   }
 
-  findOne(id: number): Promise<Professor> {
-    return this.reposytory.findOneBy({ id });
+  findOne(id: number): Promise<Object> {
+    return this.reposytory
+      .createQueryBuilder("professor")
+      .leftJoinAndSelect(
+        Aula,
+        "aula",
+        "aula.professor.id = professor.id"
+      )
+      .leftJoinAndMapMany(
+        "Materia",
+        Materia,
+        "materia",
+        "aula.materia.id = materia.id"
+      )
+      .where("professor.id = :id", { id })
+      .execute()
+      .then(result => {
+        if (result.length == 0) return {};
+
+        const newReult = {
+          id: result[0].professor_id,
+          fistname: result[0].professor_firstName,
+          lastname: result[0].professor_lastName,
+          materias: result.map(r => r.materia_materiaName),
+        }
+        return newReult;
+      });
   }
 
   async update(id: number, updateProfessoreDto: UpdateProfessoreDto): Promise<Professor> {
