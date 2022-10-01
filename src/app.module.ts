@@ -2,11 +2,14 @@ import { Module } from '@nestjs/common';
 import { CoffeeModule } from './coffee/coffee.module';
 import { ProfessoresModule } from './professores/professores.module';
 import { MateriaModule } from './materia/materia.module';
-
+import { AulaModule } from './aula/aula.module';
 
 @Module({
-  imports: [ProfessoresModule,
+  imports: [
+    AulaModule,
+    ProfessoresModule,
     CoffeeModule,
-    MateriaModule],
+    MateriaModule
+  ],
 })
 export class AppModule { }
