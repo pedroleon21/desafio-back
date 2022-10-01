@@ -5,4 +5,5 @@ export class CreateProfessoreDto {
     firstName: string
     @IsNotEmpty()
     lastName: string
+    password!: string
 }

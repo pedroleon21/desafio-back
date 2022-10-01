@@ -1,14 +1,18 @@
 import { Aula } from "src/aula/entities/aula.entity";
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { User } from "src/users/entities/user.entity";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn } from "typeorm";
 
 @Entity()
 export class Professor {
     @PrimaryGeneratedColumn()
     id: number;
-    @Column({ length: 50 })
-    firstName: string
-    @Column({ length: 50 })
-    lastName: string
+    @OneToOne(() => User, {
+        nullable: false,
+        cascade: ["update", "insert", "remove"],
+        eager: true,
+    })
+    @JoinColumn()
+    user: User
     @OneToMany(() => Aula, aula => aula.professor)
     aulas: Aula[]
 }
