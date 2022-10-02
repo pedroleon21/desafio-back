@@ -18,7 +18,7 @@ export class User {
     @Column({ length: 50 })
     lastName: string
     @Column({ length: 50 })
-    private password: string
+    password: string
     @OneToOne(() => Professor, {
         nullable: false,
         cascade: ["update", "insert", "remove"]
