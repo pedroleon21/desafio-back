@@ -1,0 +1,35 @@
+version: '3.5'
+services:
+  desafio-back-end:
+    container_name: desafio-back-end
+    build: ./Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      PORT: 3000
+    depends_on:
+      - postgres
+    links:
+      - postgres
+  postgres:
+    container_name: postgres
+    restart: always
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_USER: user
+      POSTGRES_DB: escola
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - petstore
+    ports:
+      - "4000:4000"
+  networks:
+    default:
+      driver: bridge
+      name: app

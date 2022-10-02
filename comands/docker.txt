@@ -1,1 +1,1 @@
- docker run -d -e POSTGRES_DB=escola -e POSTGRES_PASSWORD=12345678 -e POSTGRES_USER=user -p 5432:5432 postgres
+ docker run -d -e POSTGRES_DB=escola -e POSTGRES_PASSWORD=12345678 -e  POSTGRES_USER=user -p 5432:5432 --network rededb postgres
