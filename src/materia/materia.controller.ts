@@ -1,15 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
 import { MateriaService } from './materia.service';
 import { CreateMateriaDto } from './dto/create-materia.dto';
 import { UpdateMateriaDto } from './dto/update-materia.dto';
 import { AuthGuard } from 'src/filter/http/autorization/auth.guard';
-
+import { ApiTags } from '@nestjs/swagger/dist';
+import { ApiBody } from '@nestjs/swagger/dist/decorators/api-body.decorator';
+import { getSchemaPath } from '@nestjs/swagger/dist/utils/get-schema-path.util';
 @Controller('materia')
+@ApiTags("Materia")
 @UseGuards(AuthGuard)
 export class MateriaController {
   constructor(private readonly materiaService: MateriaService) { }
 
   @Post()
+  @ApiBody({ schema: { $ref: getSchemaPath(CreateMateriaDto) }, type: CreateMateriaDto, required: true })
   create(@Body() createMateriaDto: CreateMateriaDto) {
     return this.materiaService.create(createMateriaDto);
   }

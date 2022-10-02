@@ -24,8 +24,33 @@ export class AulaService {
     return this.repository.save(this.repository.create(aula));
   }
 
-  findAll() {
-    return this.repository.find();
+  findAll(
+    dia: number,
+    mes: number,
+    semana: number
+  ) {
+    return this.repository
+      .createQueryBuilder('aula')
+      .leftJoinAndSelect(
+        Materia,
+        "materia",
+        " materia.id = aula.materia.id "
+      )
+      .leftJoinAndSelect(
+        Professor,
+        "professor",
+        "professor.id = aula.professor.id"
+      )
+      .execute()
+      .then(result => result.filter(r => {
+        if (!!r.aula_data) {
+          const data = new Date('' + r.aula_data);
+          return (!(!(data.getDay() == semana) && !!semana) &&
+            !(!(data.getMonth() + 1 == mes) && !!mes) &&
+            !(!(data.getDate() == dia) && !!dia));
+        }
+        return (!r.aula_data && !semana && !dia && !mes)
+      }));
   }
 
   findOne(id: number) {
@@ -52,6 +77,6 @@ export class AulaService {
   }
 
   remove(id: number) {
-    return this.repository.delete({ id });
+    this.repository.delete({ id });
   }
 }

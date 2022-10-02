@@ -3,12 +3,18 @@ import { ProfessoresService } from './professores.service';
 import { CreateProfessoreDto } from './dto/create-professore.dto';
 import { UpdateProfessoreDto } from './dto/update-professore.dto';
 import { AuthGuard } from 'src/filter/http/autorization/auth.guard';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger/dist';
+import { ApiBody } from '@nestjs/swagger/dist/decorators/api-body.decorator';
+import { getSchemaPath } from '@nestjs/swagger/dist/utils/get-schema-path.util';
 
 @Controller('professor')
+@ApiTags("Professores")
 export class ProfessoresController {
   constructor(private readonly professoresService: ProfessoresService) { }
 
   @Post()
+  @ApiBody({ schema: { $ref: getSchemaPath(CreateProfessoreDto) }, type: CreateProfessoreDto, required: true })
+  @ApiCreatedResponse({ description: "Professor criado" })
   create(@Body() createProfessoreDto: CreateProfessoreDto) {
     return this.professoresService.create(createProfessoreDto);
   }

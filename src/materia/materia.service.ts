@@ -14,7 +14,9 @@ export class MateriaService {
   }
 
   findAll(): Promise<Materia[]> {
-    return this.reposytory.find();
+    return this
+      .reposytory
+      .find();
   }
 
   findOne(id: number) {
@@ -30,8 +32,8 @@ export class MateriaService {
     return this.reposytory.findOneBy({ id });
   }
 
-  async remove(id: number) {
-    return this.reposytory.delete({ id })
+  remove(id: number) {
+    this.reposytory.delete({ id })
       .catch(error => new ServideFailureException(error, HttpStatus.CONFLICT));
   }
 }

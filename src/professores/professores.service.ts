@@ -86,6 +86,6 @@ export class ProfessoresService {
   }
 
   remove(id: number) {
-    return this.reposytory.delete({ id });
+    this.reposytory.delete({ id });
   }
 }
