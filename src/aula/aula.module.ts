@@ -5,9 +5,16 @@ import { DatabaseModule } from 'src/database/database.module';
 import { aulaProvider } from 'src/repositoty/repository.aula';
 import { materiaProvider } from 'src/repositoty/repository.materia';
 import { professorProvider } from 'src/repositoty/reposytory.profesor';
+import { JwtModule } from '@nestjs/jwt/dist';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule,
+    JwtModule.register({
+      secret: "teste",
+      signOptions: {
+        expiresIn: "3000s"
+      }
+    })],
   controllers: [AulaController],
   providers:
     [...materiaProvider,

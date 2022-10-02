@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, UseGuards } from '@nestjs/common';
+import { AuthGuard } from 'src/filter/http/autorization/auth.guard';
 import { AulaService } from './aula.service';
 import { CreateAulaDto } from './dto/create-aula.dto';
 
 @Controller('aula')
+@UseGuards(AuthGuard)
 export class AulaController {
   constructor(private readonly aulaService: AulaService) { }
 
